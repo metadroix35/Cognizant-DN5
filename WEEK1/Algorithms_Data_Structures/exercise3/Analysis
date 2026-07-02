@@ -1,0 +1,44 @@
+# Exercise 3 – Sorting Customer Orders
+
+## Objective
+
+The objective of this exercise is to understand and implement sorting algorithms for organizing customer orders based on their total price. Sorting enables businesses to prioritize high-value orders and improves the efficiency of data processing.
+
+## Understanding Sorting Algorithms
+
+### Bubble Sort
+
+Bubble Sort is a simple comparison-based sorting algorithm. It repeatedly compares adjacent elements and swaps them if they are in the wrong order. After each pass, the largest element moves to its correct position at the end of the array.
+
+### Insertion Sort
+
+Insertion Sort builds the sorted array one element at a time. Each new element is inserted into its appropriate position among the already sorted elements. It is efficient for small or nearly sorted datasets.
+
+### Quick Sort
+
+Quick Sort is a divide-and-conquer algorithm. It selects a pivot element, partitions the array into elements smaller and larger than the pivot, and recursively sorts the partitions. It is one of the fastest general-purpose sorting algorithms.
+
+### Merge Sort
+
+Merge Sort also follows the divide-and-conquer approach. It recursively divides the array into halves, sorts each half, and merges them back together. It guarantees a time complexity of O(n log n).
+
+## Time Complexity Comparison
+
+| Algorithm      | Best Case  | Average Case | Worst Case |
+| -------------- | ---------- | ------------ | ---------- |
+| Bubble Sort    | O(n)       | O(n²)        | O(n²)      |
+| Insertion Sort | O(n)       | O(n²)        | O(n²)      |
+| Quick Sort     | O(n log n) | O(n log n)   | O(n²)      |
+| Merge Sort     | O(n log n) | O(n log n)   | O(n log n) |
+
+## Bubble Sort vs Quick Sort
+
+Bubble Sort performs repeated comparisons and swaps between adjacent elements, making it inefficient for large datasets. Quick Sort partitions the array around a pivot and recursively sorts smaller sections, resulting in significantly better average performance.
+
+## Why Quick Sort is Preferred
+
+* Faster average execution time.
+* Efficient for large datasets.
+* Requires fewer comparisons than Bubble Sort.
+* Widely used in real-world applications due to its average time complexity of O(n log n).
+

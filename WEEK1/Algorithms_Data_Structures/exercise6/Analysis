@@ -1,0 +1,64 @@
+# Exercise 6 – Library Management System
+
+## Objective
+
+The objective of this exercise is to understand and implement Linear Search and Binary Search algorithms for searching books in a library management system. The exercise demonstrates how different searching techniques affect performance depending on the size and order of the dataset.
+
+## Understanding Search Algorithms
+
+### Linear Search
+
+Linear Search is the simplest searching algorithm. It checks each element in the collection one by one until the required element is found or the entire collection has been searched.
+
+**Advantages**
+
+* Easy to implement.
+* Works on both sorted and unsorted data.
+* Suitable for small datasets.
+
+**Disadvantages**
+
+* Slow for large datasets.
+* Requires checking each element in the worst case.
+
+### Binary Search
+
+Binary Search is an efficient searching algorithm that works only on sorted data. It repeatedly divides the search space into two halves and compares the target element with the middle element until the element is found.
+
+**Advantages**
+
+* Very fast for large datasets.
+* Requires fewer comparisons.
+* Efficient due to logarithmic time complexity.
+
+**Disadvantages**
+
+* Requires the data to be sorted.
+* Slightly more complex to implement than Linear Search.
+
+## Operations Implemented
+
+* Linear Search by Book Title
+* Binary Search by Book Title
+
+## Time Complexity Comparison
+
+| Operation    | Linear Search | Binary Search |
+| ------------ | ------------- | ------------- |
+| Best Case    | O(1)          | O(1)          |
+| Average Case | O(n)          | O(log n)      |
+| Worst Case   | O(n)          | O(log n)      |
+
+## When to Use Each Algorithm
+
+### Use Linear Search When
+
+* The dataset is small.
+* The data is not sorted.
+* Simplicity is more important than performance.
+
+### Use Binary Search When
+
+* The dataset is large.
+* The data is already sorted.
+* High search efficiency is required.

@@ -1,0 +1,47 @@
+# Exercise 5 – Task Management System
+
+## Objective
+
+The objective of this exercise is to understand the implementation of a Singly Linked List by creating a Task Management System. The system performs operations such as adding, searching, traversing, and deleting tasks.
+
+## Understanding Linked Lists
+
+A linked list is a linear data structure in which each element is stored in a separate node. Each node contains data and a reference (pointer) to the next node. Unlike arrays, linked lists do not require contiguous memory allocation.
+
+### Types of Linked Lists
+
+### 1. Singly Linked List
+
+* Each node contains data and one pointer to the next node.
+* Traversal is possible only in the forward direction.
+* Requires less memory compared to a doubly linked list.
+
+### 2. Doubly Linked List
+
+* Each node contains data, a pointer to the next node, and a pointer to the previous node.
+* Supports traversal in both forward and backward directions.
+* Requires more memory because each node stores two pointers.
+
+## Operations Performed
+
+* Add Task
+* Search Task
+* Traverse Task List
+* Delete Task
+
+## Time Complexity Analysis
+
+| Operation | Time Complexity |
+| --------- | --------------- |
+| Add       | O(n)            |
+| Search    | O(n)            |
+| Traverse  | O(n)            |
+| Delete    | O(n)            |
+
+## Advantages of Linked Lists over Arrays
+
+* Dynamic size; memory is allocated as needed.
+* Easy insertion and deletion without shifting elements.
+* Better memory utilization for applications with changing data.
+* Suitable for implementing stacks, queues, and other dynamic data structures.
+

@@ -1,0 +1,89 @@
+# Exercise 2 – E-commerce Platform Search Function
+
+## Objective
+
+The objective of this exercise is to understand and implement Linear Search and Binary Search algorithms for searching products in an e-commerce platform. The exercise demonstrates how different searching techniques affect performance depending on the size and organization of the dataset.
+
+## What is Big O Notation?
+
+Big O notation is a mathematical notation used to describe the efficiency of an algorithm as the size of the input increases. It measures how the execution time or memory usage of an algorithm grows with larger datasets. Big O helps compare algorithms and determine which one performs better for a given problem.
+
+## Best, Average, and Worst Cases
+
+### Best Case
+
+The target element is found immediately, requiring the minimum number of comparisons.
+
+### Average Case
+
+The target element is found after searching through approximately half of the dataset.
+
+### Worst Case
+
+The target element is located at the last position or is not present in the dataset, requiring the maximum number of comparisons.
+
+## Linear Search
+
+Linear Search is a simple searching algorithm that checks each element one by one until the desired element is found or the entire collection has been searched.
+
+### Time Complexity
+
+| Case         | Complexity |
+| ------------ | ---------- |
+| Best Case    | O(1)       |
+| Average Case | O(n)       |
+| Worst Case   | O(n)       |
+
+### Advantages
+
+* Easy to implement.
+* Works on both sorted and unsorted datasets.
+* Suitable for small collections of data.
+
+### Disadvantages
+
+* Inefficient for large datasets.
+* Requires sequential checking of elements.
+
+## Binary Search
+
+Binary Search is an efficient searching algorithm that works only on sorted data. It repeatedly divides the search space into two halves by comparing the target element with the middle element until the target is found.
+
+### Time Complexity
+
+| Case         | Complexity |
+| ------------ | ---------- |
+| Best Case    | O(1)       |
+| Average Case | O(log n)   |
+| Worst Case   | O(log n)   |
+
+### Advantages
+
+* Very efficient for large datasets.
+* Requires significantly fewer comparisons than Linear Search.
+* Fast logarithmic time complexity.
+
+### Disadvantages
+
+* Requires the data to be sorted before searching.
+* Slightly more complex to implement.
+
+## Comparison of Linear Search and Binary Search
+
+| Operation    | Linear Search | Binary Search |
+| ------------ | ------------- | ------------- |
+| Best Case    | O(1)          | O(1)          |
+| Average Case | O(n)          | O(log n)      |
+| Worst Case   | O(n)          | O(log n)      |
+
+## Which Algorithm is Better?
+
+Binary Search is generally preferred for large datasets because it performs significantly fewer comparisons, resulting in much faster searches. However, it can only be applied when the data is sorted. Linear Search is more suitable for small or unsorted datasets due to its simplicity and flexibility.
+
+## Learning Outcomes
+
+* Understood the concept of Big O Notation.
+* Learned the difference between Best, Average, and Worst Case analysis.
+* Implemented Linear Search and Binary Search in Java.
+* Compared the performance of both searching algorithms.
+* Identified scenarios where each search algorithm is most appropriate.

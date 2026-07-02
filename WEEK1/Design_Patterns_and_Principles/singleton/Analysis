@@ -1,0 +1,59 @@
+# Exercise 1 – Implementing the Singleton Pattern
+
+## Objective
+
+The objective of this exercise is to understand and implement the Singleton Design Pattern. The Singleton Pattern ensures that a class has only one instance throughout the application's lifecycle and provides a global access point to that instance.
+
+## What is the Singleton Design Pattern?
+
+The Singleton Pattern is a creational design pattern that restricts the instantiation of a class to a single object. It is commonly used when exactly one object is required to coordinate actions across the system.
+
+## Features of Singleton Pattern
+
+* Only one instance of the class is created.
+* Provides a global access point to the instance.
+* Prevents multiple object creation.
+* Constructor is declared private.
+* Instance is created using a static method.
+
+## Implementation Steps
+
+1. Declare a private static instance of the class.
+2. Make the constructor private to prevent external object creation.
+3. Provide a public static `getInstance()` method to return the single instance.
+4. Create the instance only if it does not already exist.
+
+## Advantages
+
+* Saves memory by avoiding unnecessary object creation.
+* Ensures consistency across the application.
+* Provides controlled access to shared resources.
+* Easy to implement and widely used.
+
+## Disadvantages
+
+* Global state can make testing more difficult.
+* Can introduce tight coupling if overused.
+* Requires additional synchronization in multithreaded environments.
+
+## Applications of Singleton Pattern
+
+* Logging systems
+* Configuration management
+* Database connections
+* Cache management
+* Thread pools
+
+## Time Complexity
+
+| Operation     | Complexity |
+| ------------- | ---------- |
+| getInstance() | O(1)       |
+| log()         | O(1)       |
+
+## Learning Outcomes
+
+* Understood the Singleton Design Pattern.
+* Learned how to restrict object creation.
+* Implemented a singleton Logger class.
+* Verified that only one object exists throughout the application.

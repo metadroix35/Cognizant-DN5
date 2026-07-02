@@ -1,0 +1,70 @@
+# Exercise 2 – Implementing the Factory Method Pattern
+
+## Objective
+
+The objective of this exercise is to understand and implement the Factory Method Design Pattern. The Factory Method Pattern provides an interface for creating objects while allowing subclasses to decide which specific object to instantiate.
+
+## What is the Factory Method Pattern?
+
+The Factory Method Pattern is a creational design pattern that defines a method for creating objects without specifying their exact classes. Instead of directly creating objects using the `new` keyword, object creation is delegated to factory classes.
+
+## Components of the Pattern
+
+### Product
+
+The `Document` interface defines the common behavior for all document types.
+
+### Concrete Products
+
+* WordDocument
+* PdfDocument
+* ExcelDocument
+
+These classes implement the `Document` interface and provide their own implementation of the `open()` method.
+
+### Creator
+
+`DocumentFactory` is an abstract class that declares the factory method `createDocument()`.
+
+### Concrete Creators
+
+* WordDocumentFactory
+* PdfDocumentFactory
+* ExcelDocumentFactory
+
+Each factory creates a specific type of document.
+
+## Advantages
+
+* Promotes loose coupling between object creation and usage.
+* Makes the code easier to extend.
+* Follows the Open/Closed Principle.
+* Improves maintainability and scalability.
+
+## Disadvantages
+
+* Increases the number of classes in the project.
+* Slightly more complex than direct object creation.
+
+## Real-World Applications
+
+* Document management systems
+* Database driver creation
+* Notification services
+* GUI frameworks
+* Payment gateway implementations
+
+## Time Complexity
+
+| Operation        | Complexity |
+| ---------------- | ---------- |
+| createDocument() | O(1)       |
+| open()           | O(1)       |
+
+## Learning Outcomes
+
+* Understood the Factory Method Design Pattern.
+* Learned how to separate object creation from business logic.
+* Implemented abstract factories and concrete factories.
+* Created different document types using factory classes.
+* Improved understanding of object-oriented design principles.

@@ -1,0 +1,48 @@
+# Exercise 4 – Employee Management System
+
+## Objective
+
+The objective of this exercise is to understand how arrays are represented in memory and use them to manage employee records efficiently. The exercise involves performing basic operations such as adding, searching, traversing, and deleting employee records.
+
+## Array Representation in Memory
+
+An array is a collection of elements of the same data type stored in contiguous memory locations. Each element occupies a fixed amount of memory, and its address can be calculated using the base address and index. Because elements are stored consecutively, arrays provide fast access to data using index values.
+
+## Advantages of Arrays
+
+* Fast random access using indexes.
+* Simple to implement and understand.
+* Efficient memory utilization due to contiguous storage.
+* Suitable for storing a fixed number of elements.
+
+## Operations Performed
+
+* Add Employee
+* Search Employee
+* Traverse Employee Records
+* Delete Employee
+
+## Time Complexity Analysis
+
+| Operation | Time Complexity |
+| --------- | --------------- |
+| Add       | O(1)            |
+| Search    | O(n)            |
+| Traverse  | O(n)            |
+| Delete    | O(n)            |
+
+## Limitations of Arrays
+
+* Fixed size; cannot grow dynamically after creation.
+* Insertion and deletion may require shifting elements.
+* Memory may be wasted if the allocated size is larger than the actual number of elements.
+* Less flexible than dynamic data structures such as ArrayList or Linked List.
+
+## When to Use Arrays
+
+## Arrays are suitable when:
+
+* The number of elements is known in advance.
+* Fast index-based access is required.
+* Frequent insertion and deletion are not needed.
+

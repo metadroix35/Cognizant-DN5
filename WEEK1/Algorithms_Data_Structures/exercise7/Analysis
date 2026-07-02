@@ -1,0 +1,49 @@
+# Exercise 7 – Financial Forecasting
+
+## Objective
+
+The objective of this exercise is to understand the concept of recursion by developing a financial forecasting tool that predicts the future value of an investment based on a fixed annual growth rate.
+
+## Understanding Recursion
+
+Recursion is a programming technique in which a method calls itself to solve a problem. A recursive solution breaks a large problem into smaller subproblems of the same type until a base condition is reached. Once the base case is satisfied, the recursive calls return their results back through the call stack.
+
+Recursion is useful for problems that can naturally be divided into smaller, similar subproblems such as tree traversal, searching, sorting, factorial calculation, Fibonacci numbers, and mathematical computations.
+
+## Recursive Formula
+
+Future Value = Present Value × (1 + Growth Rate)^Years
+
+The recursive implementation repeatedly multiplies the current value by (1 + Growth Rate) until the number of years becomes zero.
+
+## Algorithm
+
+1. If the number of years is 0, return the present value.
+2. Otherwise, multiply the result of the recursive call by (1 + Growth Rate).
+3. Continue until the base case is reached.
+
+## Time Complexity
+
+| Operation          | Complexity |
+| ------------------ | ---------- |
+| Recursive Forecast | O(n)       |
+
+Where **n** is the number of years.
+
+Each recursive call reduces the number of years by one, resulting in one function call per year.
+
+## Space Complexity
+
+O(n)
+
+The recursive function uses the call stack, requiring one stack frame for each recursive call.
+
+## Optimizing the Recursive Solution
+
+The recursive solution can be optimized by:
+
+* Using an iterative approach, which eliminates recursion overhead and reduces space complexity to O(1).
+* Applying memoization when recursive calculations involve repeated subproblems.
+* Using mathematical functions such as `Math.pow()` for direct exponentiation in cases of constant growth rates.
+
+

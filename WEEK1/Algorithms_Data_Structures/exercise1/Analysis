@@ -1,0 +1,91 @@
+# Exercise 1: Inventory Management System
+
+## 1. Understanding the Problem
+
+### Why are Data Structures and Algorithms Essential in Handling Large Inventories?
+
+Data structures and algorithms play a crucial role in inventory management systems because they help organize, store, and retrieve data efficiently. In a warehouse containing thousands of products, operations such as searching, adding, updating, and deleting product information must be performed quickly. Efficient data structures reduce memory usage and improve system performance, while algorithms ensure that operations are executed in an optimized manner. Without proper data structures and algorithms, inventory operations would become slow and inefficient as the number of products increases.
+
+### Suitable Data Structures for Inventory Management
+
+Several data structures can be used for inventory management:
+
+1. **Array**
+
+   * Stores products in contiguous memory locations.
+   * Suitable for fixed-size inventories.
+   * Searching and deletion can be inefficient for large datasets.
+
+2. **ArrayList**
+
+   * Dynamic version of an array.
+   * Allows flexible resizing.
+   * Easier insertion and deletion compared to arrays.
+
+3. **HashMap**
+
+   * Stores data as key-value pairs.
+   * Provides very fast access, insertion, update, and deletion operations.
+   * Product ID can be used as the key for efficient retrieval.
+
+4. **Linked List**
+
+   * Useful when frequent insertions and deletions are required.
+   * Does not require contiguous memory allocation.
+
+For this inventory management system, **HashMap** is the most suitable choice because product records can be accessed directly using the product ID, resulting in efficient performance.
+
+## 2. Data Structure Chosen
+
+The inventory system uses a **HashMap<Integer, Product>**, where:
+
+* Key = Product ID
+* Value = Product Object
+
+This structure enables fast storage and retrieval of product information.
+
+## 3. Time Complexity Analysis
+
+### Add Product
+
+Operation: Insert a new product into the HashMap.
+
+Time Complexity: **O(1)**
+
+Reason: HashMap allows constant-time insertion in average cases.
+
+### Update Product
+
+Operation: Find a product by product ID and update its details.
+
+Time Complexity: **O(1)**
+
+Reason: Product can be accessed directly using its key.
+
+### Delete Product
+
+Operation: Remove a product from the inventory.
+
+Time Complexity: **O(1)**
+
+Reason: HashMap directly locates and removes the product using the key.
+
+### Display All Products
+
+Operation: Traverse all products in the inventory.
+
+Time Complexity: **O(n)**
+
+Reason: Every product must be visited once.
+
+## 4. Optimization Techniques
+
+The inventory operations can be optimized by:
+
+* Using HashMap instead of arrays or lists for direct access through product IDs.
+* Using unique product IDs as keys to avoid duplicate entries.
+* Minimizing unnecessary traversals of the inventory.
+* Implementing indexing techniques for additional search requirements.
+* Using balanced tree structures when sorted access to products is required.
+
+By using HashMap, the inventory management system achieves efficient storage, retrieval, updating, and deletion of product records, making it suitable for handling large inventories.
