@@ -1,0 +1,89 @@
+===================================================
+Part 2 Exercise 6 - Theory: Criteria Query
+===================================================
+
+-------------------------------------------------
+WHY DOES CRITERIA QUERY EXIST?
+-------------------------------------------------
+The Criteria API exists to build DYNAMIC, TYPE-SAFE queries programmatically
+at runtime using Java objects instead of hardcoded string-based queries (HQL/JPQL).
+
+Problems with string-based JPQL:
+  - No compile-time checking: typos in field names are not caught until runtime.
+  - Hard to build dynamic queries with optional filters (lots of if-else + string concat).
+  - Not type-safe: mistakes are only found when the query runs.
+
+Criteria API solves these by:
+  - Building queries using Java objects and method calls.
+  - Compile-time type checking (metamodel-assisted).
+  - Clean and maintainable dynamic query construction.
+
+-------------------------------------------------
+CRITERIA API COMPONENTS
+-------------------------------------------------
+
+1. CriteriaBuilder
+   - Factory object for creating query objects, expressions, and predicates.
+   - Obtained from EntityManager: entityManager.getCriteriaBuilder()
+   - Key methods:
+       cb.createQuery(T.class)      - Create a new CriteriaQuery
+       cb.equal(x, y)               - Equality predicate
+       cb.like(x, pattern)          - LIKE predicate
+       cb.greaterThan(x, value)     - Greater than predicate
+       cb.and(p1, p2, ...)          - Combine predicates with AND
+       cb.or(p1, p2, ...)           - Combine predicates with OR
+
+2. CriteriaQuery<T>
+   - Represents the structure of the query (SELECT, FROM, WHERE, ORDER BY).
+   - Created by CriteriaBuilder.
+   - Key methods:
+       cq.from(Entity.class)         - Define root entity (FROM clause)
+       cq.select(expression)         - Define SELECT clause
+       cq.where(predicates)          - Define WHERE clause
+       cq.orderBy(...)               - Define ORDER BY clause
+
+3. Root<T>
+   - Represents the root entity in the FROM clause.
+   - Used to navigate entity fields and relationships.
+   - Key methods:
+       root.get("fieldName")         - Get a field of the root entity
+       root.get("relation").get("field") - Navigate to related entity's field
+
+4. TypedQuery<T>
+   - A compiled, type-safe, executable query with a known result type.
+   - Created from CriteriaQuery via EntityManager.
+   - Key methods:
+       query.getResultList()         - Execute and get list of results
+       query.getSingleResult()       - Execute and get single result
+       query.setMaxResults(n)        - Limit results (pagination)
+
+-------------------------------------------------
+CRITERIA QUERY FLOW
+-------------------------------------------------
+  1. CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+  2. CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
+  3. Root<Employee> root = cq.from(Employee.class);
+  4. Add predicates: predicates.add(cb.equal(root.get("permanent"), true));
+  5. cq.where(predicates.toArray(new Predicate[0]));
+  6. TypedQuery<Employee> query = entityManager.createQuery(cq);
+  7. List<Employee> results = query.getResultList();
+
+-------------------------------------------------
+DYNAMIC SEARCH EXAMPLE (this project)
+-------------------------------------------------
+  searchEmployees(name, minSalary, departmentId, permanent)
+  - Each filter is optional (null = not applied).
+  - Only non-null filters are added to the query.
+  - This cannot be done cleanly with a single @Query string.
+
+-------------------------------------------------
+CRITERIA API vs JPQL
+-------------------------------------------------
+  Feature         | JPQL @Query            | Criteria API
+  ----------------|------------------------|----------------------
+  Type-safe       | No (strings)           | Yes (Java objects)
+  Dynamic filters | Complex string concat  | Clean if-else with predicates
+  Readability     | Good for static queries| Good for dynamic queries
+  Compile check   | No                     | Yes
+  Verbosity       | Less                   | More
+  Use case        | Static known queries   | Dynamic/optional filter queries

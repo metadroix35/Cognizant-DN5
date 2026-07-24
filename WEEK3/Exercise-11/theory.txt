@@ -1,0 +1,59 @@
+===================================================
+Part 2 Exercise 5 - Theory: Native Query
+===================================================
+
+-------------------------------------------------
+WHAT IS A NATIVE QUERY?
+-------------------------------------------------
+A Native Query is a raw SQL query executed directly against the database.
+Unlike HQL/JPQL which uses entity names and field names, native queries use
+actual table names and column names as they exist in the database.
+
+-------------------------------------------------
+HOW TO USE IN SPRING DATA JPA
+-------------------------------------------------
+Use @Query with nativeQuery = true:
+
+  @Query(value = "SELECT * FROM employee", nativeQuery = true)
+  List<Employee> findAllNative();
+
+  The value contains raw SQL (table name = "employee", not the entity class name).
+
+-------------------------------------------------
+JPQL/HQL vs NATIVE QUERY
+-------------------------------------------------
+  Feature              | JPQL/HQL             | Native Query
+  ---------------------|----------------------|-----------------------------
+  Language             | Entity-based         | Raw SQL
+  Database-independent | Yes                  | No (DB-specific syntax)
+  Table names          | Entity class names   | Actual DB table names
+  Column names         | Field names          | Actual column names
+  Performance          | Good                 | Can be faster for complex SQL
+  Complex SQL          | Limited              | Full SQL power (functions,
+                       |                      | window functions, etc.)
+
+-------------------------------------------------
+WHEN TO USE NATIVE QUERY?
+-------------------------------------------------
+  1. When you need database-specific features (e.g., stored procedures,
+     window functions, full-text search).
+  2. When performance is critical and SQL is highly optimized.
+  3. When migrating legacy SQL to JPA.
+  4. When JPQL/HQL cannot express the required query.
+
+-------------------------------------------------
+LIMITATIONS OF NATIVE QUERY
+-------------------------------------------------
+  - Not portable across databases (SQL dialect differences).
+  - Cannot use entity inheritance polymorphism.
+  - Must use @SqlResultSetMapping for complex result sets.
+  - Harder to maintain when table/column names change.
+
+-------------------------------------------------
+EXAMPLE IN THIS PROJECT
+-------------------------------------------------
+  @Query(value = "SELECT * FROM employee", nativeQuery = true)
+  List<Employee> findAllNative();
+
+  Spring Data JPA maps the result rows back to Employee entity objects
+  automatically since the query returns all columns.

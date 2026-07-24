@@ -1,0 +1,75 @@
+===================================================
+Exercise 5 - Theory: OneToMany, LazyInitializationException
+===================================================
+
+ONE TO MANY MAPPING
+-------------------
+@OneToMany is used when one entity is related to multiple instances of another entity.
+
+Example: One Department has many Employees.
+
+  Department:
+    @OneToMany(mappedBy = "department")
+    private Set<Employee> employees;
+
+  Employee:
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+-------------------------------------------------
+LazyInitializationException
+-------------------------------------------------
+
+WHAT IS IT?
+  LazyInitializationException is thrown by Hibernate when you try to access
+  a LAZILY loaded collection AFTER the Hibernate session has been closed.
+
+WHY DOES IT OCCUR?
+  - When you load an entity, Hibernate opens a session to talk to the database.
+  - LAZY collections are NOT loaded at that point - just a proxy is kept.
+  - Once the session closes (end of a @Transactional method or request),
+    the proxy can no longer fetch data from the database.
+  - If you then try to access the collection (e.g., dept.getEmployees()),
+    Hibernate throws LazyInitializationException because there is no open session.
+
+CODE THAT CAUSES IT:
+  // No @Transactional here
+  Department dept = departmentRepository.findById(1L).get();
+  dept.getEmployees().size(); // <-- LazyInitializationException!
+
+ERROR MESSAGE:
+  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+  of role: Department.employees, could not initialize proxy - no Session
+
+HOW TO FIX IT?
+  Option 1: Change to FetchType.EAGER
+    @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
+    // Hibernate will JOIN and load employees immediately
+
+  Option 2: Use @Transactional
+    @Transactional
+    public Department getDepartmentWithEmployees(Long id) {
+        Department dept = departmentRepository.findById(id).get();
+        dept.getEmployees().size(); // OK - session is still open
+        return dept;
+    }
+
+  Option 3: Use JOIN FETCH in JPQL
+    @Query("SELECT d FROM Department d JOIN FETCH d.employees WHERE d.id = :id")
+    Department findByIdWithEmployees(@Param("id") Long id);
+
+-------------------------------------------------
+LAZY vs EAGER (Summary)
+-------------------------------------------------
+  LAZY (default for @OneToMany):
+    - Data fetched only when accessed
+    - Risk of LazyInitializationException
+    - Better performance when collection not needed
+
+  EAGER:
+    - Data always fetched with parent
+    - No LazyInitializationException
+    - May cause performance issues
+
+In this project: FetchType.EAGER is used to fix LazyInitializationException.

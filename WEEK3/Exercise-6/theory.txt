@@ -1,0 +1,70 @@
+===================================================
+Exercise 6 - Theory: ManyToMany, LazyInitializationException
+===================================================
+
+MANY TO MANY MAPPING
+--------------------
+@ManyToMany is used when multiple instances of one entity are related to multiple
+instances of another entity. A JOIN TABLE is used to store the relationship.
+
+Example: An Employee can have many Skills, and a Skill can belong to many Employees.
+
+  Employee (owning side):
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "employee_skill",
+        joinColumns = @JoinColumn(name = "employee_id"),
+        inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private Set<Skill> skills;
+
+  Skill (inverse side):
+    @ManyToMany(mappedBy = "skills")
+    private Set<Employee> employees;
+
+  Database table created: employee_skill (employee_id, skill_id)
+
+OWNING vs INVERSE SIDE:
+  - The owning side controls the join table (uses @JoinTable).
+  - The inverse side uses mappedBy to point to the owning side's field name.
+  - Hibernate only looks at the owning side to persist the relationship.
+  - Always add/remove from the owning side's collection.
+
+-------------------------------------------------
+LazyInitializationException in ManyToMany
+-------------------------------------------------
+
+HOW IT OCCURS:
+  @ManyToMany defaults to FetchType.LAZY.
+  If you access emp.getSkills() outside a Hibernate session, it throws:
+    LazyInitializationException: failed to lazily initialize a collection
+
+CODE THAT CAUSES IT:
+  // No @Transactional
+  Employee emp = employeeRepository.findById(1L).get();
+  emp.getSkills().forEach(System.out::println); // <-- Exception!
+
+HOW TO FIX IT:
+
+  Option 1: FetchType.EAGER (used in this project)
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Skill> skills;
+    // Skills are loaded immediately with the employee
+
+  Option 2: @Transactional
+    Keep the session open by annotating the method with @Transactional.
+
+  Option 3: JOIN FETCH in JPQL
+    @Query("SELECT e FROM Employee e JOIN FETCH e.skills WHERE e.id = :id")
+
+-------------------------------------------------
+IMPORTANT NOTES about ManyToMany
+-------------------------------------------------
+  - Avoid bidirectional EAGER on both sides - causes infinite loops / performance issues.
+  - Always use Set (not List) to avoid duplicate join rows.
+  - With @ManyToMany EAGER, the join table is always queried along with the entity.
+  - toString() must NOT include the collection to avoid StackOverflowError.
+
+In this project:
+  - Employee.skills uses FetchType.EAGER (owning side)
+  - Skill.employees uses default LAZY (inverse side, avoided in toString)

@@ -1,0 +1,60 @@
+===================================================
+Exercise 4 - Theory: EAGER vs LAZY Fetch
+===================================================
+
+FETCH TYPE IN JPA
+-----------------
+Fetch type controls WHEN associated/related entities are loaded from the database.
+
+-------------------------------------------------
+LAZY FETCH (FetchType.LAZY)
+-------------------------------------------------
+- The related entity is NOT loaded immediately when the parent is loaded.
+- A proxy object is returned instead.
+- The actual data is fetched from the database only when you ACCESS the property.
+- This is the DEFAULT for @OneToMany and @ManyToMany.
+
+Example:
+  Employee emp = employeeRepository.findById(1L).get();
+  // At this point, department is NOT loaded (just a proxy)
+  emp.getDepartment().getName(); // NOW it queries the DB
+
+Advantages of LAZY:
+  - Better performance when you don't always need the related entity.
+  - Reduces unnecessary database queries.
+  - Less memory usage.
+
+Disadvantages of LAZY:
+  - Can cause LazyInitializationException if accessed outside a session/transaction.
+
+-------------------------------------------------
+EAGER FETCH (FetchType.EAGER)
+-------------------------------------------------
+- The related entity IS loaded immediately along with the parent entity.
+- A JOIN query is issued automatically.
+- This is the DEFAULT for @ManyToOne and @OneToOne.
+
+Example:
+  Employee emp = employeeRepository.findById(1L).get();
+  // At this point, department IS already loaded (JOIN was done)
+  emp.getDepartment().getName(); // No additional DB query needed
+
+Advantages of EAGER:
+  - No LazyInitializationException.
+  - Convenient when you always need the related data.
+
+Disadvantages of EAGER:
+  - Can cause performance issues (N+1 problem) if not used carefully.
+  - Loads unnecessary data even when you don't need it.
+  - Can produce Cartesian product issues with multiple EAGER collections.
+
+-------------------------------------------------
+WHICH TO USE?
+-------------------------------------------------
+- Use LAZY as the default (especially for collections).
+- Use EAGER only for frequently accessed, mandatory associations (like @ManyToOne).
+- For LAZY, use @Transactional or JOIN FETCH to avoid LazyInitializationException.
+
+Hibernate SQL Behavior:
+  LAZY  -> SELECT * FROM employee WHERE id=1
+  EAGER -> SELECT e.*, d.* FROM employee e LEFT JOIN department d ON e.department_id=d.id WHERE e.id=1

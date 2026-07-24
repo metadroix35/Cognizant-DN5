@@ -1,0 +1,3 @@
+com\cognizant\stock\entity\Stock.class
+com\cognizant\stock\StockQueryApplication.class
+com\cognizant\stock\repository\StockRepository.class

@@ -1,0 +1,65 @@
+===================================================
+Part 2 Exercise 2 - Theory: JOIN vs JOIN FETCH
+===================================================
+
+-------------------------------------------------
+JOIN in HQL/JPQL
+-------------------------------------------------
+A regular JOIN in HQL performs a database join to FILTER results, but does NOT
+eagerly load the joined entity into memory. It is used for WHERE conditions.
+
+Example:
+  SELECT e FROM Employee e JOIN e.department d WHERE d.name = 'Engineering'
+
+  - Hibernate executes a SQL JOIN to find employees in Engineering.
+  - However, department data is NOT pre-loaded into the Employee object.
+  - Accessing e.getDepartment() later would trigger another query (if LAZY).
+
+-------------------------------------------------
+JOIN FETCH in HQL/JPQL
+-------------------------------------------------
+JOIN FETCH performs a database join AND eagerly loads the joined entity into memory
+in a single query. It overrides LAZY fetch settings for that specific query.
+
+Example:
+  SELECT DISTINCT e FROM Employee e JOIN FETCH e.department WHERE e.permanent = true
+
+  - One SQL query loads both employees AND their departments.
+  - No additional query is needed to access e.getDepartment().
+  - Solves LazyInitializationException for that specific call.
+
+-------------------------------------------------
+COMPARISON
+-------------------------------------------------
+  Feature              | JOIN                | JOIN FETCH
+  ---------------------|---------------------|---------------------------
+  Purpose              | Filtering only      | Filtering + loading data
+  Extra queries        | Yes (if LAZY)       | No (single query)
+  LazyInit exception   | Possible            | Avoided
+  Performance          | Lighter per query   | One heavy query
+  Use case             | WHERE conditions    | Always need related data
+
+-------------------------------------------------
+WHEN TO USE JOIN FETCH?
+-------------------------------------------------
+  - When you know you will always need the related entity's data.
+  - To avoid N+1 query problem:
+      Without JOIN FETCH: 1 query for employees + N queries for departments
+      With JOIN FETCH: 1 query for both
+
+  - Always use DISTINCT with JOIN FETCH on collections to avoid duplicates.
+
+-------------------------------------------------
+EXAMPLE IN THIS PROJECT
+-------------------------------------------------
+  Basic HQL:
+    @Query("SELECT e FROM Employee e WHERE e.permanent = true")
+    - Does not pre-fetch department or skills.
+
+  Optimized with JOIN FETCH:
+    @Query("SELECT DISTINCT e FROM Employee e
+            JOIN FETCH e.department
+            JOIN FETCH e.skills
+            WHERE e.permanent = true")
+    - Loads employees, departments, and skills in one query.
+    - DISTINCT prevents duplicate rows from the join.

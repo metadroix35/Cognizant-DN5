@@ -1,0 +1,11 @@
+com\cognizant\ems\projection\EmployeeSummary.class
+com\cognizant\ems\controller\DepartmentController.class
+com\cognizant\ems\service\DepartmentService.class
+com\cognizant\ems\config\JpaAuditingConfig.class
+com\cognizant\ems\EmployeeManagementSystemApplication.class
+com\cognizant\ems\entity\Employee.class
+com\cognizant\ems\repository\DepartmentRepository.class
+com\cognizant\ems\repository\EmployeeRepository.class
+com\cognizant\ems\controller\EmployeeController.class
+com\cognizant\ems\entity\Department.class
+com\cognizant\ems\service\EmployeeService.class

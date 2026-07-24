@@ -1,0 +1,73 @@
+===================================================
+Part 2 Exercise 1 - Theory: HQL vs JPQL
+===================================================
+
+-------------------------------------------------
+JPQL (Java Persistence Query Language)
+-------------------------------------------------
+- JPQL is a standard query language defined by the JPA specification.
+- Queries are written against entity class names and field names, NOT table/column names.
+- It is database-independent (works with any JPA provider like Hibernate, EclipseLink).
+- Part of the javax.persistence (jakarta.persistence) API.
+
+Example JPQL:
+  SELECT e FROM Employee e WHERE e.permanent = true
+  (Employee is the entity class name, not the DB table name)
+
+-------------------------------------------------
+HQL (Hibernate Query Language)
+-------------------------------------------------
+- HQL is Hibernate's own query language, a superset of JPQL.
+- HQL supports everything JPQL does, PLUS additional Hibernate-specific features.
+- HQL queries are also written against entity names and field names.
+- HQL is only available when using Hibernate as the JPA provider.
+
+Example HQL:
+  SELECT e FROM Employee e WHERE e.permanent = true
+  (Same syntax as JPQL - HQL is mostly compatible)
+
+-------------------------------------------------
+DIFFERENCES
+-------------------------------------------------
+  Feature              | JPQL             | HQL
+  ---------------------|------------------|---------------------------
+  Standard             | Yes (JPA spec)   | No (Hibernate-specific)
+  Portability          | Works with any   | Only Hibernate
+                       | JPA provider     |
+  Extended features    | Standard only    | More features (e.g., FILTER)
+  Syntax               | Entity-based     | Entity-based (superset)
+  SQL functions        | Limited          | More built-in functions
+  Native queries       | Not supported    | Not supported (use native)
+
+-------------------------------------------------
+ADVANTAGES OF JPQL
+-------------------------------------------------
+  1. Portable - not tied to Hibernate.
+  2. Standard specification - every JPA provider understands it.
+  3. Safe - works with any JPA implementation.
+  4. Supported by @Query annotation in Spring Data JPA.
+
+-------------------------------------------------
+ADVANTAGES OF HQL
+-------------------------------------------------
+  1. More powerful - supports additional Hibernate-specific features.
+  2. Better integration with Hibernate Session API.
+  3. Supports additional functions not in standard JPQL.
+
+-------------------------------------------------
+IN PRACTICE (Spring Data JPA)
+-------------------------------------------------
+  In Spring Data JPA using @Query, you write JPQL (which also works as HQL
+  since Hibernate is the default provider). There is practically no difference
+  for most use cases.
+
+  @Query("SELECT e FROM Employee e WHERE e.permanent = true")
+  List<Employee> findPermanentEmployees();
+
+  Both JPQL and HQL would look the same in Spring Boot + Hibernate.
+
+-------------------------------------------------
+KEY RULE
+-------------------------------------------------
+  Use entity names (Employee), not table names (employee) in JPQL/HQL.
+  Use field names (permanent), not column names (is_permanent) in JPQL/HQL.

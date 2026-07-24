@@ -1,0 +1,58 @@
+===================================================
+Part 2 Exercise 4 - Theory: @Param in Spring Data JPA
+===================================================
+
+-------------------------------------------------
+@Param ANNOTATION
+-------------------------------------------------
+@Param is used in Spring Data JPA to bind named method parameters
+to named parameters inside a @Query annotation.
+
+Without @Param, Spring Data JPA cannot map the method argument to
+the named placeholder in the query string.
+
+-------------------------------------------------
+USAGE
+-------------------------------------------------
+In @Query, named parameters are prefixed with a colon (:).
+
+  @Query("SELECT AVG(e.salary) FROM Employee e WHERE e.department.id = :departmentId")
+  Double findAverageSalaryByDepartment(@Param("departmentId") Long departmentId);
+
+  Here:
+    - :departmentId is the named parameter in the HQL query.
+    - @Param("departmentId") maps the method argument to the query parameter.
+
+-------------------------------------------------
+WITHOUT @Param (Positional Parameters)
+-------------------------------------------------
+You can use ?1, ?2 ... positional parameters instead:
+
+  @Query("SELECT AVG(e.salary) FROM Employee e WHERE e.department.id = ?1")
+  Double findAverageSalaryByDepartment(Long departmentId);
+
+  Positional parameters are simpler but less readable for complex queries.
+
+-------------------------------------------------
+NAMED vs POSITIONAL
+-------------------------------------------------
+  Feature           | @Param (named)          | Positional (?1, ?2)
+  ------------------|-------------------------|----------------------
+  Readability       | High - parameter names  | Low - just numbers
+  Order-dependent   | No                      | Yes
+  Refactor-safe     | Yes                     | No
+  Recommended       | Yes                     | For simple queries
+
+-------------------------------------------------
+EXAMPLE IN THIS PROJECT
+-------------------------------------------------
+  // Average salary of ALL employees (no parameter)
+  @Query("SELECT AVG(e.salary) FROM Employee e")
+  Double findAverageSalary();
+
+  // Average salary of a SPECIFIC department (with @Param)
+  @Query("SELECT AVG(e.salary) FROM Employee e WHERE e.department.id = :departmentId")
+  Double findAverageSalaryByDepartment(@Param("departmentId") Long departmentId);
+
+  Usage:
+    double avg = employeeRepository.findAverageSalaryByDepartment(1L);

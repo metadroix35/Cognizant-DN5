@@ -1,0 +1,15 @@
+INSERT INTO country (name) VALUES ('India');
+INSERT INTO country (name) VALUES ('United States');
+INSERT INTO country (name) VALUES ('United Kingdom');
+INSERT INTO country (name) VALUES ('South Africa');
+INSERT INTO country (name) VALUES ('Australia');
+INSERT INTO country (name) VALUES ('Zambia');
+INSERT INTO country (name) VALUES ('Zimbabwe');
+INSERT INTO country (name) VALUES ('France');
+INSERT INTO country (name) VALUES ('Germany');
+INSERT INTO country (name) VALUES ('Japan');
+INSERT INTO country (name) VALUES ('Canada');
+INSERT INTO country (name) VALUES ('Mozambique');
+INSERT INTO country (name) VALUES ('Ecuador');
+INSERT INTO country (name) VALUES ('Honduras');
+INSERT INTO country (name) VALUES ('Yemen');

@@ -1,0 +1,10 @@
+com\cognizant\entitymapping\repository\DepartmentRepository.class
+com\cognizant\entitymapping\repository\SkillRepository.class
+com\cognizant\entitymapping\EntityMappingApplication.class
+com\cognizant\entitymapping\entity\Employee.class
+com\cognizant\entitymapping\repository\EmployeeRepository.class
+com\cognizant\entitymapping\service\EmployeeService.class
+com\cognizant\entitymapping\service\DepartmentService.class
+com\cognizant\entitymapping\service\SkillService.class
+com\cognizant\entitymapping\entity\Skill.class
+com\cognizant\entitymapping\entity\Department.class
