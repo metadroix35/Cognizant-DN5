@@ -1,0 +1,26 @@
+
+PL/SQL procedure successfully completed.
+
+
+    LOANID CUSTOMERID INTERESTRATE DUEDATE 
+---------- ---------- ------------ --------
+       101          1          7.5 16-07-26
+       102          2            9 15-08-26
+       103          3            7 26-07-26
+       104          4          7.5 21-07-26
+       105          5          7.2 11-07-26
+
+
+PL/SQL procedure successfully completed.
+
+
+CUSTOMERID NAME                                                                                                        AGE    BALANCE ISVIP
+---------- ---------------------------------------------------------------------------------------------------- ---------- ---------- -----
+         1 John                                                                                                        65      12000 TRUE
+         2 Alice                                                                                                       45       8000 FALSE
+         3 Bob                                                                                                         70      15000 TRUE
+         4 David                                                                                                       30       5000 FALSE
+         5 Emma                                                                                                        61      25000 TRUE
+
+
+PL/SQL procedure successfully completed.

@@ -1,0 +1,35 @@
+
+Procedure SAFETRANSFERFUNDS compiled
+
+
+Procedure UPDATESALARY compiled
+
+
+Procedure ADDNEWCUSTOMER compiled
+
+
+PL/SQL procedure successfully completed.
+
+
+PL/SQL procedure successfully completed.
+
+
+PL/SQL procedure successfully completed.
+
+
+ ACCOUNTID CUSTOMERNAME                                                                                            BALANCE
+---------- ---------------------------------------------------------------------------------------------------- ----------
+       101 John                                                                                                     10000
+       102 Alice                                                                                                    13000
+
+
+EMPLOYEEID EMPLOYEENAME                                                                                             SALARY
+---------- ---------------------------------------------------------------------------------------------------- ----------
+         1 David                                                                                                    55000
+         2 Emma                                                                                                     60000
+
+
+CUSTOMERID CUSTOMERNAME                                                                                                AGE    BALANCE
+---------- ---------------------------------------------------------------------------------------------------- ---------- ----------
+         1 John                                                                                                        65      12000
+         2 Bob                                                                                                         45       9000
